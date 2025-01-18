@@ -6,8 +6,6 @@ url: https://github.com/TECH7Fox/goaccess-hass-addons
 image: ghcr.io/tech7fox/goaccess-hass-addon
 panel_title: GoAccess
 panel_icon: mdi:chart-bar
-webui: "http://[HOST]:[PORT:7880]/"
-watchdog: "http://[HOST]:[PORT:7880]/"
 init: false
 arch:
   - armhf
