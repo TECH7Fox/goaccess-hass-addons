@@ -2,15 +2,16 @@ FROM ghcr.io/hassio-addons/debian-base:7.3.4 AS base
 
 SHELL [ "/bin/bash", "-euxo", "pipefail", "-c" ]
 
-RUN wget -qO - https://deb.goaccess.io/gnugpg.key | gpg --dearmor | tee /usr/share/keyrings/goaccess.gpg >/dev/null \
-    && echo "deb [signed-by=/usr/share/keyrings/goaccess.gpg arch=$(dpkg --print-architecture)] https://deb.goaccess.io/ bookworm main" | tee /etc/apt/sources.list.d/goaccess.list
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
     libgeoip-dev \
     wget \
     gpg \
-    goaccess \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN wget -qO - https://deb.goaccess.io/gnugpg.key | gpg --dearmor | tee /usr/share/keyrings/goaccess.gpg >/dev/null \
+    && echo "deb [signed-by=/usr/share/keyrings/goaccess.gpg arch=$(dpkg --print-architecture)] https://deb.goaccess.io/ bookworm main" | tee /etc/apt/sources.list.d/goaccess.list \
+    && apt-get update && apt-get install -y --no-install-recommends goaccess \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY rootfs /
