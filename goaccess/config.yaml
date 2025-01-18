@@ -1,0 +1,23 @@
+name: GoAccess
+version: latest
+slug: goaccess
+description: Open source real-time web log analyzer
+url: https://github.com/TECH7Fox/goaccess-hass-addons
+panel_title: GoAccess
+panel_icon: mdi:chart-bar
+webui: "http://[HOST]:[PORT:7880]/"
+watchdog: "http://[HOST]:[PORT:7880]/"
+init: false
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+ingress: true
+ingress_port: 7880
+ports:
+  7880/tcp: 7880
+map:
+  - addon_config:rw
+  - all_addon_configs:rw
